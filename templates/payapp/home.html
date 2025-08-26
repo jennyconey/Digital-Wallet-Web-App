@@ -1,0 +1,34 @@
+{% extends 'payapp/base.html' %}
+
+{% block title %}
+    WebApps Homepage
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h5>Your current balance is ${{ user_balance|default:"0.00" }}</h5>
+        <br>
+        {% if pending_requests|length > 0 %}
+            <h6>Pending requests:</h6>
+            <table>
+                <tr>
+                    <th>Requester</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+                {% for request in pending_requests %}
+                    <tr>
+                        <td>{{ request.enter_your_username }}</td>
+                        <td>{{ request.amount_to_request }}</td>
+                        <td>{{ request.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <h5>There are no requests for user: <em>{{user.username}}</em>.</h5>
+        {% endif %}
+    {% else %}
+        <h5>WebApps Homepage.</h5>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'payapp/base.html' %}
+
+{% block title %}
+    Users' Balance
+{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <br>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Balance</th>
+            </tr>
+            <tr>
+                <td>{{ src_balance.name }}</td>
+                <td>{{ src_balance.balance }}</td>
+            </tr>
+            <tr>
+                <td>{{ dst_balance.name }}</td>
+                <td>{{ dst_balance.balance }}</td>
+            </tr>
+        </table>
+    {% endif %}
+
+{% endblock %}l>

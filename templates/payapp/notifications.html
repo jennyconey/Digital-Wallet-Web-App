@@ -1,0 +1,20 @@
+<li class ="nav-item dropdown">
+    <div class="notification-dropdown">
+        <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell"></i></button>
+        <div class="dropdown-menu dropdown-menu-end">
+        {% if pending_requests|length > 0 %}
+            {% for request in pending_requests %}
+                <form class="dropdown-item" method="post" action="{% url 'processtransfer' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="request_id" value="{{ request.id }}">
+                    <p>{{ request.enter_your_username }} - {{ request.amount_to_request }}</p>
+                    <button type="submit" name="action" value="accept">Accept</button>
+                    <button type="submit" name="action" value="deny">Deny</button>
+                </form>
+            {% endfor %}
+            {% else %}
+                <p> No new requests.</p>
+        {%  endif  %}
+        </div>
+    </div>
+</li>

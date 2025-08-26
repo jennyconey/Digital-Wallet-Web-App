@@ -1,0 +1,22 @@
+{% extends 'payapp/base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2>{% if user.is_staff or user.is_superuser %}All Transactions{% else %}Your Transactions{% endif %}</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Amount</th>
+            </tr>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.timestamp }}</td>
+                    <td>{{ transaction.sender.username }}</td>
+                    <td>{{ transaction.receiver.username }}</td>
+                    <td>${{ transaction.amount }}</td>
+                </tr>
+            {% endfor %}
+    {% endif %}
+    </table>
+{% endblock %}
